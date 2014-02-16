@@ -35,7 +35,7 @@ class MyCalendar {
   var monthsOfTheYear = new Array[Month](12)
   println("Creating new Calendar")
   for (i <- 0 until monthsOfTheYear.length) {
-    monthsOfTheYear(i) = new Month(i, 2014)
+    monthsOfTheYear(i) = new Month(i, 2014)  // FIX THIS. YEAR SHOULDNT BE A PARAM
   }  
 }
 
