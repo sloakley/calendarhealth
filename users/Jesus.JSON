@@ -26,5 +26,15 @@
 				"last_update": "Wed Jan 1 16:22:14 EST 2014"
 			}
 		}
+	},
+	"1": {
+		"April": {
+			"20": {
+				"exercise": "false",
+				"booze": "true",
+				"food": "20.00",
+				"last_update": ""
+			}
+		}
 	}
 }

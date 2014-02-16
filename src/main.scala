@@ -115,13 +115,13 @@ object main {
 	users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).update(false, 0.00, true, "")
 	println(users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).getHealth())
 	println(users{"Jesus"})
-	println(users{"Jesus"}.yearsCalendars)
+	println(users{"Jesus"}.yearsCalendars) // should print a map
 	println(users{"Jesus"}.yearsCalendars{"2013"}.monthsOfTheYear(10).daysOfTheMonth(0).getHealth())
 	println(users{"Jesus"}.yearsCalendars{"2013"}.monthsOfTheYear(11).daysOfTheMonth(0).getHealth())
 
-	//for (day <- users{"Jesus"}.yearsCalendars{"2013"}.monthsOfTheYear(11).daysOfTheMonth) {
-	  //println(day.getHealth())
-	//}
 	println(users{"Jesus"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(1).getHealth())
+	//should print out Jesus's exciting junk food ridden 420, in the year 1AD
+	println(users{"Jesus"}.yearsCalendars{"1"}.monthsOfTheYear(3).daysOfTheMonth(20).getHealth())
+
   }
 }
