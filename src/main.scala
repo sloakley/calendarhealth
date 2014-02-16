@@ -3,6 +3,15 @@
 // specify simple types? Let scala type-inference different classes/objs
 // such as Calendars?
 
+
+/*
+ * NOTES
+ * 	Janet.JSON wont be parsed correctly till I remove the // comments 
+ *  readJSON() seems to handle all the non json files it reads correctly.
+ *  	If it can't parse em, it creates an empty json object. It checks to see 
+ *   	if the object is empty before attempting to 'parse' it. 
+ *  Doesn't currently write to JSON upon program shutdown. Need to implement..
+ */
 /* projected handling 
      UI - Front end calendar web ui
      			\    /
