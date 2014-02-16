@@ -15,8 +15,8 @@ class Day {
     this.food = newFood
     this.booze = newBooze
     this.last_update = time match {
-      case "" => new java.util.Date().toString()
-      case _ => time
+      case "" => new java.util.Date().toString() // purposely update time 
+      case _ => time // anything
     }
   } 
   

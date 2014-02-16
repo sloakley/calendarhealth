@@ -37,19 +37,19 @@ import scala.util.matching.Regex
 //import rapture.io
 
 
-class MyCalendar {
+class MyCalendar(year:Int) {
   // Create all twelve months, but with empty Day objects
   // months prior to the boot date will load from json
   // future months remain null? Saves memory
   var monthsOfTheYear = new Array[Month](12)
   println("Creating new Calendar")
   for (i <- 0 until monthsOfTheYear.length) {
-    monthsOfTheYear(i) = new Month(i, 2014)  // FIX THIS. YEAR SHOULDNT BE A PARAM
+    monthsOfTheYear(i) = new Month(i, year)  // FIX THIS. YEAR SHOULDNT BE A PARAM
   }  
 }
 
 
-class Person {
+class Person() {
   var yearsCalendars = Map[String, MyCalendar]() //ArrayBuffer[MyCalendar]() 
   println("Creating new Person")
 }
@@ -74,17 +74,17 @@ object main {
       users++=Map(username -> new Person())
       
       for (year <- jsonMap.keys) {
-        users{username}.yearsCalendars ++= Map(year -> new MyCalendar())             
+        users{username}.yearsCalendars ++= Map(year -> new MyCalendar(year.toInt))             
         for (month <- jsonMap{year}.keys) 
           for (day <- jsonMap{year}{month}.keys) {
             users{username}.yearsCalendars{year}.monthsOfTheYear(
                 month match { // case match within the function call parameters
                   case "January" => 0   case "February" => 1
-                  case "March" => 2     case "April" => 0
-                  case "May" => 0       case "June" => 0
-                  case "July" => 0      case "August" => 0
-                  case "September" => 0 case "October" => 0
-                  case "November" => 0  case "December" => 0
+                  case "March" => 2     case "April" => 3
+                  case "May" => 4       case "June" => 5
+                  case "July" => 6      case "August" => 7
+                  case "September" => 8 case "October" => 9
+                  case "November" => 10  case "December" => 11
                 }).daysOfTheMonth(day.toInt).
                 update(jsonMap{year}{month}{day}{"exercise"}.toLowerCase.toBoolean, 
                     jsonMap{year}{month}{day}{"food"}.toLowerCase.toDouble, 
@@ -107,12 +107,21 @@ object main {
 
   def main(args: Array[String]) {
 	println("ayy lmao")
-	var indCal = new MyCalendar() 
+	//var indCal = new MyCalendar() 
 	println(new java.util.Date().toString())
 	handleJSON("/Users/lucas/Projects/calendarhealth/users")
 	println(users.keys)
 	println(users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).getHealth())
 	users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).update(false, 0.00, true, "")
 	println(users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).getHealth())
+	println(users{"Jesus"})
+	println(users{"Jesus"}.yearsCalendars)
+	println(users{"Jesus"}.yearsCalendars{"2013"}.monthsOfTheYear(10).daysOfTheMonth(0).getHealth())
+	println(users{"Jesus"}.yearsCalendars{"2013"}.monthsOfTheYear(11).daysOfTheMonth(0).getHealth())
+
+	//for (day <- users{"Jesus"}.yearsCalendars{"2013"}.monthsOfTheYear(11).daysOfTheMonth) {
+	  //println(day.getHealth())
+	//}
+	println(users{"Jesus"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(1).getHealth())
   }
 }

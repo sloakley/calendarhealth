@@ -1,0 +1,30 @@
+{
+	"2013": {
+		"November": {
+			"0": {
+				"exercise": "false",
+				"booze": "true",
+				"food": "2",
+				"last_update": "Fri Nov 1 16:22:14 EST 2013" 
+			}
+		},
+		"December": {
+			"0": {
+				"exercise": "false",
+				"booze": "true",
+				"food": "1.5",
+				"last_update": "Sun Dec 1 16:22:14 EST 2013"
+			}
+		}
+	},
+	"2014": {
+		"January": {
+			"1": {
+				"exercise": "true",
+				"booze": "false",
+				"food": "0.00",
+				"last_update": "Wed Jan 1 16:22:14 EST 2014"
+			}
+		}
+	}
+}
