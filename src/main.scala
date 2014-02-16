@@ -76,7 +76,7 @@ object main {
                   case "July" => 0      case "August" => 0
                   case "September" => 0 case "October" => 0
                   case "November" => 0  case "December" => 0
-                }).daysOfTheMonth(day.toInt-1).
+                }).daysOfTheMonth(day.toInt).
                 update(jsonMap{year}{month}{day}{"exercise"}.toLowerCase.toBoolean, 
                     jsonMap{year}{month}{day}{"food"}.toLowerCase.toDouble, 
                     jsonMap{year}{month}{day}{"booze"}.toLowerCase.toBoolean, 
