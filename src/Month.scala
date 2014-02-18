@@ -15,6 +15,6 @@ class Month(month: Int, year: Int) {
   var daysOfTheMonth = new Array[Day](monthMaxDays)
   //println(monthMaxDays + " days in the month of "+(month+1) )
   for (i <- 0 until daysOfTheMonth.length) {
-    daysOfTheMonth(i) = new Day()
+    daysOfTheMonth(i) = new Day()// null having null save memory till it's needed?
   }  
 }

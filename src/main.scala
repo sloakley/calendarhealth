@@ -4,13 +4,24 @@
 // such as Calendars?
 
 
+
+
 /*
  * NOTES
+ * 15 Feb 2014
  * 	Janet.JSON wont be parsed correctly till I remove the // comments 
  *  readJSON() seems to handle all the non json files it reads correctly.
  *  	If it can't parse em, it creates an empty json object. It checks to see 
  *   	if the object is empty before attempting to 'parse' it. 
  *  Doesn't currently write to JSON upon program shutdown. Need to implement..
+ * 17 Feb 2014
+ *  Maybe I'm making this harder than it needs to be....
+ *  Why don't I just save the jsonMap object from readJSON() into the person object,
+ *  	then I wouldnt need all this converting it to Day() and Month() objects bullshit. 
+ *   	It would also make writing it back to the .JSON easier instead of having to 
+ *    	convert it back from the Day() Month() Calendar() objects. FFFFFFFFFFFFFF
+ *      	Line 88 - start to implement this idea in the public usersmap var 
+ *  
  */
 /* projected handling 
      UI - Front end calendar web ui
@@ -41,11 +52,14 @@ class MyCalendar(year:Int) {
   // Create all twelve months, but with empty Day objects
   // months prior to the boot date will load from json
   // future months remain null? Saves memory
+  var a = 1
   var monthsOfTheYear = new Array[Month](12)
   println("Creating new Calendar")
   for (i <- 0 until monthsOfTheYear.length) {
     monthsOfTheYear(i) = new Month(i, year)  // FIX THIS. YEAR SHOULDNT BE A PARAM
-  }  
+  }
+  
+  //def instantiateMonth(whichMonth:Int) {}
 }
 
 
@@ -72,7 +86,7 @@ object main {
       var username = (fl.substring(fl.lastIndexOf("/")+1,fl.lastIndexOf(".JSON"))).toString
       //add the username to the user map
       users++=Map(username -> new Person())
-      
+      usersmap ++= Map(username -> jsonMap)
       for (year <- jsonMap.keys) {
         users{username}.yearsCalendars ++= Map(year -> new MyCalendar(year.toInt))             
         for (month <- jsonMap{year}.keys) 
@@ -84,7 +98,7 @@ object main {
                   case "May" => 4       case "June" => 5
                   case "July" => 6      case "August" => 7
                   case "September" => 8 case "October" => 9
-                  case "November" => 10  case "December" => 11
+                  case "November" => 10 case "December" => 11
                 }).daysOfTheMonth(day.toInt).
                 update(jsonMap{year}{month}{day}{"exercise"}.toLowerCase.toBoolean, 
                     jsonMap{year}{month}{day}{"food"}.toLowerCase.toDouble, 
@@ -103,14 +117,28 @@ object main {
     }
   }
   
+  def writeJSON() {
+    var tempJSONMap = Map[String,Map[String, Map[String, Map[String, String]]]]()
+    
+    
+    for (user <- users.keys) {
+      for (year <- users{user}.yearsCalendars.keys) {
+        for (month <- users{user}.yearsCalendars{year}.monthsOfTheYear) {
+          println(month)
+        }
+      }
+    }
+  }
+  
   var users = Map[String, Person]()
+  var usersmap = Map[String, Map[String,Map[String, Map[String, Map[String, String]]]]]()
 
   def main(args: Array[String]) {
 	println("ayy lmao")
 	//var indCal = new MyCalendar() 
 	println(new java.util.Date().toString())
 	handleJSON("/Users/lucas/Projects/calendarhealth/users")
-	println(users.keys)
+	/*println(users.keys)
 	println(users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).getHealth())
 	users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).update(false, 0.00, true, "")
 	println(users{"Lucas"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(0).getHealth())
@@ -122,6 +150,14 @@ object main {
 	println(users{"Jesus"}.yearsCalendars{"2014"}.monthsOfTheYear(0).daysOfTheMonth(1).getHealth())
 	//should print out Jesus's exciting junk food ridden 420, in the year 1AD
 	println(users{"Jesus"}.yearsCalendars{"1"}.monthsOfTheYear(3).daysOfTheMonth(20).getHealth())
+	*/
+	println(users)
+	println(usersmap)
+	println(usersmap{"Lucas"})
+	println(usersmap{"Jesus"}{"1"})
+	
+	//writeJSON()
+	
 
   }
 }
